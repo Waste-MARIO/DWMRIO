@@ -5,12 +5,17 @@ Created on Wed Oct  4 11:53:18 2023
 @author: loren
 """
 
-import mario
+
 import pandas as pd
 
 user = 'LR'
 year = 2011
 paths = pd.read_excel("Paths.xlsx", index_col=[0]).loc[:,"LR"]
+
+import sys
+sys.path.insert(1, paths['MARIO'])
+
+import mario
 
 #%% Parse exiobase IOT ixi of given year
 world = mario.parse_exiobase(
