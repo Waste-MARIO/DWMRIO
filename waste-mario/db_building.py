@@ -8,9 +8,9 @@ Created on Wed Oct  4 11:53:18 2023
 
 import pandas as pd
 
-user = 'LR'
+user = 'CF'
 year = 2011
-paths = pd.read_excel("Paths.xlsx", index_col=[0]).loc[:,"LR"]
+paths = pd.read_excel("Paths.xlsx", index_col=[0]).loc[:,"CF"]
 
 import sys
 sys.path.insert(1, paths['MARIO'])
@@ -23,6 +23,13 @@ world = mario.parse_exiobase(
     unit='Monetary',
     path=paths['IOT folder']+f"\\IOT_{year}_ixi.zip"
     )
+
+#%% aggregating regions
+world.get_aggregation_excel(path=paths['Region aggregation'])
+
+#%% aggregating regions                            
+world.aggregate(io=paths['Region aggregation'])
+
 
 #%% creating template for new sectors
 new_sectors = [
@@ -50,8 +57,6 @@ world.add_sectors(
     item='Sector',
     )
 
-#%% aggregating regions
-# world.get_aggregation_excel(...)
 
 #%% export 
 world.to_txt(
